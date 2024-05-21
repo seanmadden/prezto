@@ -28,19 +28,28 @@ zstyle ':prezto:*:*' color 'yes'
 # zstyle ':prezto:load' zfunction 'zargs' 'zmv'
 
 # Set the Prezto modules to load (browse modules).
-# The order matters.
-zstyle ':prezto:load' pmodule \
-  'environment' \
-  'terminal' \
-  'editor' \
-  'history' \
-  'directory' \
-  'spectrum' \
-  'utility' \
-  'completion' \
-  'history-substring-search' \
-  'git' \
+MODULES_TO_LOAD=(
+  'environment'
+  'terminal'
+  'editor'
+  'fasd'
+  'history'
+  'directory'
+  'spectrum'
+  'utility'
+  'completion'
+  'history-substring-search'
+  'git'
   'prompt'
+  'tmux'
+)
+
+if [[ $(uname) == "Darwin" ]]; then
+  MODULES_TO_LOAD+='osx'
+fi
+
+# The order matters.
+zstyle ':prezto:load' pmodule $MODULES_TO_LOAD
 
 #
 # Autosuggestions
@@ -117,7 +126,7 @@ zstyle ':prezto:module:editor' dot-expansion 'yes'
 # zstyle ':prezto:module:history-substring-search' case-sensitive 'yes'
 
 # Enable search for fuzzy matches.
-# zstyle ':prezto:module:history-substring-search' fuzzy 'yes'
+zstyle ':prezto:module:history-substring-search' fuzzy 'yes'
 
 # Enable search uniqueness.
 # zstyle ':prezto:module:history-substring-search' unique 'yes'
@@ -241,11 +250,11 @@ zstyle ':prezto:module:tmux:auto-start' local 'yes'
 # Auto start a session when Zsh is launched in a SSH connection.
 # zstyle ':prezto:module:tmux:auto-start' remote 'yes'
 
-# Integrate with iTerm2.
-zstyle ':prezto:module:tmux:iterm' integrate 'yes'
+# Integrate with iTerm2. I don't like this.
+# zstyle ':prezto:module:tmux:iterm' integrate 'yes'
 
 # Set the default session name:
-# zstyle ':prezto:module:tmux:session' name 'YOUR DEFAULT SESSION NAME'
+zstyle ':prezto:module:tmux:session' name 'slack'
 
 #
 # Utility
